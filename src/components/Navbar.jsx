@@ -1,14 +1,21 @@
-export default function Navbar() {
+import { Link } from "react-router-dom";
+
+function Navbar() {
   return (
-    <div style={{
-      backgroundColor: "#1a237e",
-      color: "white",
-      padding: "16px",
-      textAlign: "center",
-      fontSize: "18px",
-      fontWeight: "600"
+    <nav style={{
+      padding: "12px",
+      backgroundColor: "#1f2937",
+      display: "flex",
+      gap: "20px"
     }}>
-      Solapur Smart Mobility
-    </div>
+      <Link to="/" style={{ color: "white" }}>Traffic</Link>
+      <Link to="/parking" style={{ color: "white" }}>Parking</Link>
+      <Link to="/routes" style={{ color: "white" }}>Routes</Link>
+      <Link to="/complaint" style={{ color: "white" }}>
+        Report Issue
+      </Link>
+    </nav>
   );
 }
+
+export default Navbar;

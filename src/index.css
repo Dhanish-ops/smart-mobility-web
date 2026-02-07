@@ -3,3 +3,10 @@ body {
   font-family: system-ui, -apple-system, BlinkMacSystemFont;
   background: #ffffff;
 }
+.card {
+  background: #f3f4f6;
+  padding: 30px;
+  border-radius: 12px;
+  text-align: center;
+  font-weight: bold;
+}

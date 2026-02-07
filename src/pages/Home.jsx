@@ -1,42 +1,37 @@
-import Navbar from "../components/Navbar";
+import { useNavigate } from "react-router-dom";
 
-export default function Home() {
+function Home() {
+  const navigate = useNavigate();
+
   return (
-    <>
-      <Navbar />
+    <div style={{ padding: "20px" }}>
+      <h1>Welcome 👋</h1>
+      <p>Live traffic & parking updates in Solapur</p>
 
-      <div style={{ padding: "16px" }}>
-        <h3>Welcome 👋</h3>
-        <p>Live traffic & parking updates in Solapur</p>
+      <div style={{
+        display: "grid",
+        gridTemplateColumns: "repeat(2, 1fr)",
+        gap: "20px",
+        marginTop: "30px"
+      }}>
+        
+        <div className="card">🚦 Live Traffic</div>
+        <div className="card">🅿️ Parking</div>
+        <div className="card">🧭 Routes</div>
+        <div className="card">🚨 Alerts</div>
 
-        <div style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(2, 1fr)",
-          gap: "12px",
-          marginTop: "20px"
-        }}>
-          <DashboardCard icon="🚦" title="Live Traffic" />
-          <DashboardCard icon="🅿️" title="Parking" />
-          <DashboardCard icon="🧭" title="Routes" />
-          <DashboardCard icon="🚓" title="Alerts" />
+        {/* NEW CARD */}
+        <div
+          className="card"
+          onClick={() => navigate("/complaint")}
+          style={{ cursor: "pointer" }}
+        >
+          📝 Report Issue
         </div>
-      </div>
-    </>
-  );
-}
 
-function DashboardCard({ icon, title }) {
-  return (
-    <div style={{
-      background: "#f5f5f5",
-      borderRadius: "14px",
-      padding: "20px",
-      textAlign: "center",
-      fontSize: "16px",
-      fontWeight: "500"
-    }}>
-      <div style={{ fontSize: "30px" }}>{icon}</div>
-      <div>{title}</div>
+      </div>
     </div>
   );
 }
+
+export default Home;

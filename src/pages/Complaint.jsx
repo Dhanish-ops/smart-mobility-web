@@ -1,28 +1,25 @@
 import { useState } from "react";
 
 function Complaint() {
-  const [location, setLocation] = useState("");
   const [issue, setIssue] = useState("");
   const [photo, setPhoto] = useState(null);
+  const [userLocation, setUserLocation] = useState("");
 
   const getLocation = () => {
-    navigator.geolocation.getCurrentPosition(
-      (pos) => {
-        setLocation(
-          `${pos.coords.latitude}, ${pos.coords.longitude}`
-        );
-      },
-      () => alert("Location access denied")
-    );
+    navigator.geolocation.getCurrentPosition((position) => {
+      setUserLocation(
+        `${position.coords.latitude}, ${position.coords.longitude}`
+      );
+    });
   };
 
-  const submitComplaint = (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     const complaintData = {
       issue,
-      location,
       photo,
+      location: userLocation,
     };
 
     console.log("Complaint Submitted:", complaintData);
@@ -31,30 +28,29 @@ function Complaint() {
 
   return (
     <div style={{ padding: "20px" }}>
-      <h2>Report a Problem</h2>
+      <h2>Report an Issue</h2>
 
-      <form onSubmit={submitComplaint}>
+      <form onSubmit={handleSubmit}>
         <label>Issue Type</label><br />
-        <select onChange={(e) => setIssue(e.target.value)} required>
-          <option value="">Select Issue</option>
-          <option>Road Damage</option>
-          <option>Illegal Parking</option>
-          <option>Signal Not Working</option>
-          <option>Obstruction</option>
+        <select value={issue} onChange={(e) => setIssue(e.target.value)}>
+          <option value="">Select</option>
+          <option value="Traffic">Traffic</option>
+          <option value="Parking">Parking</option>
+          <option value="Road Damage">Road Damage</option>
         </select>
 
         <br /><br />
 
         <label>Upload Photo</label><br />
-        <input type="file" accept="image/*"
-          onChange={(e) => setPhoto(e.target.files[0])} />
+        <input type="file" onChange={(e) => setPhoto(e.target.files[0])} />
 
         <br /><br />
 
         <button type="button" onClick={getLocation}>
           Get Location
         </button>
-        <p>{location}</p>
+
+        <p>{userLocation}</p>
 
         <button type="submit">Submit Complaint</button>
       </form>
